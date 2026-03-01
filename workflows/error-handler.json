@@ -1,0 +1,56 @@
+{
+    "nodes": [
+        {
+            "parameters": {
+                "sendTo": "morthell@gmail.com",
+                "subject": "Workflow failed!",
+                "message": "=<!DOCTYPE html>\n<html lang=\"pl\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Alert o Błędzie Automatyzacji</title>\n    <style>\n        body {\n            margin: 0;\n            padding: 0;\n            background-color: #f4f4f4;\n            font-family: Arial, sans-serif;\n        }\n        .container {\n            width: 100%;\n            max-width: 600px;\n            margin: 20px auto;\n            background-color: #ffffff;\n            border: 1px solid #dddddd;\n            border-radius: 8px;\n            overflow: hidden;\n        }\n        .header {\n            background-color: #d9534f;\n            color: #ffffff;\n            padding: 20px;\n            text-align: center;\n        }\n        .header h1 {\n            margin: 0;\n            font-size: 24px;\n        }\n        .content {\n            padding: 30px;\n            color: #333333;\n        }\n        .content h2 {\n            color: #d9534f;\n        }\n        .info-table {\n            width: 100%;\n            border-collapse: collapse;\n            margin-bottom: 20px;\n        }\n        .info-table td {\n            padding: 10px;\n            border: 1px solid #eeeeee;\n        }\n        .info-table .label {\n            font-weight: bold;\n            background-color: #f9f9f9;\n            width: 30%;\n        }\n        .button {\n            display: inline-block;\n            background-color: #0275d8;\n            color: #ffffff;\n            padding: 12px 25px;\n            text-align: center;\n            text-decoration: none;\n            border-radius: 5px;\n            font-weight: bold;\n            margin-top: 20px;\n        }\n        .stack-trace {\n            margin-top: 30px;\n            background-color: #2b2b2b;\n            color: #f1f1f1;\n            padding: 15px;\n            border-radius: 5px;\n            font-family: 'Courier New', Courier, monospace;\n            font-size: 12px;\n            white-space: pre-wrap;\n            word-wrap: break-word;\n            max-height: 200px;\n            overflow-y: auto;\n        }\n        details > summary {\n            cursor: pointer;\n            font-weight: bold;\n            color: #0275d8;\n        }\n    </style>\n</head>\n<body>\n    <div class=\"container\">\n        <div class=\"header\">\n            <h1>🚨 Wystąpił Błąd w Automatyzacji</h1>\n        </div>\n        <div class=\"content\">\n            <h2>Wykryto problem, który wymaga Twojej uwagi.</h2>\n            <p>Poniżej znajdują się szczegóły dotyczące błędu, który wystąpił w jednym z Twoich workflow n8n.</p>\n            \n            <table class=\"info-table\">\n                <tr>\n                    <td class=\"label\">Workflow:</td>\n                    <td>{{ $json.workflow.name }}</td>\n                </tr>\n                <tr>\n                    <td class=\"label\">Nod, który zawiódł:</td>\n                    <td>{{$json.execution.error.node.name}}</td>\n                </tr>\n                <tr>\n                    <td class=\"label\">Komunikat błędu:</td>\n                    <td><strong>{{ $json.execution.error.message }}</strong></td>\n                </tr>\n                <tr>\n                    <td class=\"label\">Data i godzina:</td>\n                    <td>{{new Date($json.execution.timestamp).toLocaleString('pl-PL', { timeZone: 'Europe/Warsaw' })}}</td>\n                </tr>\n            </table>\n\n            <a href=\"{{ $json.execution.url }}\" class=\"button\" target=\"_blank\">Zobacz wykonanie w n8n</a>\n\n            <details style=\"margin-top: 30px;\">\n                <summary>Pokaż pełny zrzut błędu (Stack Trace)</summary>\n                <div class=\"stack-trace\">\n                    <pre><code>{{ $json.execution.error.stack }}</code></pre>\n                </div>\n            </details>\n        </div>\n    </div>\n</body>\n</html>",
+                "options": {}
+            },
+            "type": "n8n-nodes-base.gmail",
+            "typeVersion": 2.1,
+            "position": [
+                224,
+                0
+            ],
+            "id": "92c38360-6504-4d34-b728-c7516e334cd5",
+            "name": "Gmail",
+            "webhookId": "6b1b6e38-af1f-412c-92ad-927e5ba775aa",
+            "credentials": {
+                "gmailOAuth2": {
+                    "id": "7I1MRZgc9aqCUP8m",
+                    "name": "Gmail account 2"
+                }
+            }
+        },
+        {
+            "parameters": {},
+            "type": "n8n-nodes-base.errorTrigger",
+            "typeVersion": 1,
+            "position": [
+                0,
+                0
+            ],
+            "id": "a540e0d1-130b-4eb9-8787-24ae0b9e1600",
+            "name": "Error Trigger"
+        }
+    ],
+    "connections": {
+        "Error Trigger": {
+            "main": [
+                [
+                    {
+                        "node": "Gmail",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        }
+    },
+    "pinData": {},
+    "meta": {
+        "templateCredsSetupCompleted": true,
+        "instanceId": "33fa8cbf36d5058194d59348385de74348e84a314b303d8cdb7462f4bb07e384"
+    }
+}

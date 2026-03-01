@@ -63,7 +63,6 @@ Full technical documentation (process analysis, database schema, workflow logic,
 ├── README.md
 ├── docs/
 │   ├── documentation.md    # Full technical documentation
-│   └── setup.md            # Credentials & configuration guide
 └── workflows/
     ├── client-onboarding.json
     ├── invoicing.json
