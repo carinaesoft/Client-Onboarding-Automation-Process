@@ -1,0 +1,1144 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1Qq895dzah0nsrT32bhqpU87a676X_q6wVJ24tg_Phys/edit?resourcekey=&gid=1906229850#gid=1906229850",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1906229850,
+          "mode": "list",
+          "cachedResultName": "Liczba odpowiedzi: 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Qq895dzah0nsrT32bhqpU87a676X_q6wVJ24tg_Phys/edit#gid=1906229850"
+        },
+        "event": "rowAdded",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTrigger",
+      "typeVersion": 1,
+      "position": [
+        -768,
+        64
+      ],
+      "id": "3c97c71e-cb3d-46f9-8024-bfeabdae44b8",
+      "name": "Google Sheets Trigger",
+      "credentials": {
+        "googleSheetsTriggerOAuth2Api": {
+          "id": "IeucaS0oSVo2kdQx",
+          "name": "Google Sheets Trigger account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "upsert",
+        "base": {
+          "__rl": true,
+          "value": "appsrHARKLs8eeVIU",
+          "mode": "list",
+          "cachedResultName": "Automation House Client Onboarding",
+          "cachedResultUrl": "https://airtable.com/appsrHARKLs8eeVIU"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblvQDTa35Y2m7uWF",
+          "mode": "list",
+          "cachedResultName": "Klienci",
+          "cachedResultUrl": "https://airtable.com/appsrHARKLs8eeVIU/tblvQDTa35Y2m7uWF"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Imię i Nazwisko": "={{ $json['Imię i Nazwisko'] }}",
+            "Email": "={{ $json['Adres email'] }}",
+            "Nazwa Firmy": "={{ $json['Nazwa firmy'] }}",
+            "Telefon": "={{ $json['Numer telefonu'] }}",
+            "Odpowiedzi z Formularza": "={{ $json[\"Co możemy dla Ciebie zrobić?\"] }}",
+            "Status": "Nowy"
+          },
+          "matchingColumns": [
+            "Email"
+          ],
+          "schema": [
+            {
+              "id": "ClientID",
+              "displayName": "ClientID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Imię i Nazwisko",
+              "displayName": "Imię i Nazwisko",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Telefon",
+              "displayName": "Telefon",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Nazwa Firmy",
+              "displayName": "Nazwa Firmy",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Odpowiedzi z Formularza",
+              "displayName": "Odpowiedzi z Formularza",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Analiza Potrzeb AI",
+              "displayName": "Analiza Potrzeb AI",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Sugerowany Pakiet",
+              "displayName": "Sugerowany Pakiet",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Umówiona konsultacja",
+                  "value": "Umówiona konsultacja"
+                },
+                {
+                  "name": "Zafakturowany",
+                  "value": "Zafakturowany"
+                },
+                {
+                  "name": "Nowy",
+                  "value": "Nowy"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Faktury",
+              "displayName": "Faktury",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Konsultacje",
+              "displayName": "Konsultacje",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        -320,
+        64
+      ],
+      "id": "01d3117c-4e37-4027-8785-ec31f546c0fd",
+      "name": "Airtable",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "BObUj5pVoXPlIkvo",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "b9ca3099-3c9a-4921-9cc4-208c81b17dc9",
+              "leftValue": "={{ $json[\"Adres email\"] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "empty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -544,
+        64
+      ],
+      "id": "066ac540-e5bc-48cf-8400-41eafa98cf61",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Przeanalizuj poniższe zapytanie od klienta i wygeneruj odpowiedź JSON.\n\nDane klienta:\n- Imię: \"{{ $json.fields[\"Imię i Nazwisko\"] }}\"\n- Opis potrzeb: \"{{ $json.fields[\"Odpowiedzi z Formularza\"] }}\"\n\nNa podstawie danych, przygotuj:\n1. Podsumowanie potrzeb klienta w punktach do pola \"Analiza_Potrzeb_AI\".\n2. Sugerowany pakiet (\"Basic\", \"Pro\" lub \"Enterprise\") do pola \"Sugerowany_Pakiet\".\n3. 3-punktowy poradnik dla klienta, jak przygotować się do konsultacji, w formacie listy HTML (<ol>) do pola \"Przewodnik_AI\".\n4. Spersonalizowaną wiadomość powitalną, napisaną w imieniu firmy, do pola \"Personalizacja_Wiadomosci\".\n\nPamiętaj, aby zwrócić tylko surowy obiekt JSON.",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "Jesteś ekspertem od analizy procesów biznesowych w firmie konsultingowej. Twoim zadaniem jest analiza zapytań od nowych klientów.\n\nZawsze odpowiadaj TYLKO i WYŁĄCZNIE poprawnym obiektem JSON. Nie dodawaj żadnych wstępów, wyjaśnień ani formatowania markdown (np. ```json).\n\nObiekt JSON musi zawierać cztery klucze: \"Analiza_Potrzeb_AI\", \"Sugerowany_Pakiet\", \"Przewodnik_AI\" oraz \"Personalizacja_Wiadomosci\".\n\nPole \"Przewodnik_AI\" musi być wygenerowane jako gotowy do wklejenia fragment kodu HTML w formacie listy uporządkowanej (np. \"<ol><li>Punkt 1</li><li>Punkt 2</li></ol>\").\n\nPole \"Personalizacja_Wiadomosci\" ma być krótką (2-3 zdania) wiadomością powitalną w języku polskim. Musi być napisana w imieniu firmy (używając formy \"my\", np. \"rozumiemy\", \"pomożemy\") i zwracać się do klienta po imieniu. Nigdy nie proponuj w tej wiadomości następnych kroków. Te podasz w przewodniku AI. \n\nDo sugestii pakietu użyj kryteriów:\n- \"Basic\": Proste zadania, automatyzacja jednego procesu.\n- \"Pro\": Optymalizacja kilkuetapowego procesu, integracja systemów.\n- \"Enterprise\": Złożone, strategiczne projekty, wdrożenia AI.\n\nJeśli opis potrzeb klienta jest pusty lub niejasny, w polu \"Analiza_Potrzeb_AI\" wpisz \"Wymagany kontakt w celu doprecyzowania potrzeb.\", a jako pakiet zasugeruj \"Basic\"."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2,
+      "position": [
+        128,
+        64
+      ],
+      "id": "81617d4d-bbf3-44ab-b5e3-91a7936d1bdb",
+      "name": "AI Agent",
+      "retryOnFail": true,
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-5-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-5-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        64,
+        288
+      ],
+      "id": "07aad167-9c94-4f0c-815c-d021283e3086",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "5CJmQBC8xGSC52w4",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Get new clients from Google Form \nBased on connected Google Sheet.\n",
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -880,
+        -208
+      ],
+      "id": "7e15fdbb-01f5-441d-ab2f-bc044bda40ce",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## If check\n\nCheck if added row in sheet is correct, by checking if email exists and if it was not yet synced with Airtable"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -624,
+        -208
+      ],
+      "id": "588c527c-7603-4c09-a75b-5348a6140f42",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## Update `Klient` table\nUpsert on email and telephone number. Otherwise create new.",
+        "height": 140,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -368,
+        -208
+      ],
+      "id": "9f6749b9-27ee-483c-8549-d90ece9edf78",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "## AI Integration\nAnalyze needs of the client and generate suggested plan.",
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        160,
+        -208
+      ],
+      "id": "1a64721b-9484-4399-bf24-7e8fc514168d",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "compare": "selectedFields",
+        "fieldsToCompare": "id",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.removeDuplicates",
+      "typeVersion": 2,
+      "position": [
+        -96,
+        64
+      ],
+      "id": "90d09831-ea0f-4bc5-808a-5af2b9deca2e",
+      "name": "Remove Duplicates"
+    },
+    {
+      "parameters": {
+        "content": "## Removing duplicates\n\nWhen Upsert record is choosen, there is chance that record will be updated and Airtable returns 2 items. As we don't want to run 2 times on the same record, removing duplicate on id field.",
+        "height": 240
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -96,
+        -288
+      ],
+      "id": "ffc40b64-e366-4a46-9297-33c5999a0b93",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\"Analiza_Potrzeb_AI\":\"Wymagany kontakt w celu doprecyzowania potrzeb.\",\"Sugerowany_Pakiet\":\"Basic\",\"Przewodnik_AI\":[\"Przygotuj listę konkretnych zadań i procesów, które chcesz zautomatyzować (krótki opis, częstotliwość, ilość zaangażowanych osób).\",\"Sporządź spis używanych systemów i narzędzi oraz formatów danych, do których mamy dostęp, oraz informacji o istniejących integracjach.\",\"Określ priorytety i oczekiwane korzyści (np. oszczędność czasu, redukcja błędów, cele kosztowe) oraz dostępność kluczowych osób na konsultację.\"] ,\"Personalizacja_Wiadomosci\":\"Cześć Bart, dziękuję za zgłoszenie — rozumiem, że chcesz zautomatyzować pracę. Proponuję krótką rozmowę, by doprecyzować zakres i priorytety, dzięki czemu zaproponujemy najefektywniejsze rozwiązanie.\"}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        272,
+        288
+      ],
+      "id": "9de3fd61-dfc0-446f-8d8e-98cdeb63b650",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appsrHARKLs8eeVIU",
+          "mode": "list",
+          "cachedResultName": "Automation House Client Onboarding",
+          "cachedResultUrl": "https://airtable.com/appsrHARKLs8eeVIU"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblvQDTa35Y2m7uWF",
+          "mode": "list",
+          "cachedResultName": "Klienci",
+          "cachedResultUrl": "https://airtable.com/appsrHARKLs8eeVIU/tblvQDTa35Y2m7uWF"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Wiadomosc Personalizowana": "={{ $json.output.Personalizacja_Wiadomosci }}",
+            "Przewodnik AI": "={{ $json.output.Przewodnik_AI }}.",
+            "Sugerowany Pakiet": "={{ $json.output.Sugerowany_Pakiet }}",
+            "Analiza Potrzeb AI": "={{ $json.output.Analiza_Potrzeb_AI }}",
+            "id": "={{ $('Remove Duplicates').item.json.id }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true
+            },
+            {
+              "id": "ClientID",
+              "displayName": "ClientID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Imię i Nazwisko",
+              "displayName": "Imię i Nazwisko",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Telefon",
+              "displayName": "Telefon",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Nazwa Firmy",
+              "displayName": "Nazwa Firmy",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Odpowiedzi z Formularza",
+              "displayName": "Odpowiedzi z Formularza",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Analiza Potrzeb AI",
+              "displayName": "Analiza Potrzeb AI",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Sugerowany Pakiet",
+              "displayName": "Sugerowany Pakiet",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Umówiona konsultacja",
+                  "value": "Umówiona konsultacja"
+                },
+                {
+                  "name": "Zafakturowany",
+                  "value": "Zafakturowany"
+                },
+                {
+                  "name": "Nowy",
+                  "value": "Nowy"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Faktury",
+              "displayName": "Faktury",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Konsultacje",
+              "displayName": "Konsultacje",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Przewodnik AI",
+              "displayName": "Przewodnik AI",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Wiadomosc Personalizowana",
+              "displayName": "Wiadomosc Personalizowana",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        512,
+        -48
+      ],
+      "id": "a3d4ad3e-579a-4bc6-9f77-78f05531f24e",
+      "name": "Update table with AI output",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "BObUj5pVoXPlIkvo",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.fields.Email }}",
+        "subject": "Potwierdzenie złożenia odpowiedzi na formularz kontaktowy.",
+        "message": "=<!DOCTYPE html>\n<html lang=\"pl\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Witaj w Momentum Konsulting!</title>\n    <style>\n        /* Basic styles for better rendering */\n        body {\n            margin: 0;\n            padding: 0;\n            font-family: Arial, sans-serif;\n            background-color: #f4f7f6;\n        }\n        table {\n            border-collapse: collapse;\n        }\n        h1, h2, p {\n            margin: 0;\n        }\n    </style>\n</head>\n<body style=\"margin: 0; padding: 0; font-family: Arial, sans-serif; background-color: #f4f7f6;\">\n    <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">\n        <tr>\n            <td style=\"padding: 20px 0;\">\n                <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"600\" style=\"background-color: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden;\">\n                    <!-- Header with Logo -->\n                    <tr>\n                        <td align=\"center\" style=\"padding: 40px 0; background-color: #005f73; color: #ffffff;\">\n                            <!-- Logo for Momentum Konsulting -->\n                            <img src=\"https://bcassetcdn.com/public/blog/wp-content/uploads/2019/07/18094631/consulting-summits.png\" alt=\"Logo Momentum Konsulting\" width=\"150\" style=\"display: block;\">\n                            <h1 style=\"margin: 20px 0 0 0; font-size: 28px;\">Witaj na pokładzie!</h1>\n                        </td>\n                    </tr>\n                    <!-- Main Content -->\n                    <tr>\n                        <td style=\"padding: 40px 30px;\">\n                            <!-- Personalized Welcome Message -->\n                            <p style=\"font-size: 16px; line-height: 1.6em; margin: 0 0 25px 0; color: #333333;\">\n                                <!-- N8N Variable for Personalized Message -->\n                                {{ $json.fields['Wiadomosc Personalizowana'] }}\n                            </p>\n                            \n                            <!-- Section 1: About Us -->\n                            <h2 style=\"color: #333333; border-bottom: 2px solid #eeeeee; padding-bottom: 10px; margin-bottom: 15px; font-size: 20px;\">Jak możemy Ci pomóc?</h2>\n                            <p style=\"font-size: 16px; line-height: 1.6em; color: #555555;\">\n                                W <b>Momentum Konsulting</b> pomagamy firmom nabrać rozpędu dzięki optymalizacji i automatyzacji procesów. Wdrażamy inteligentne rozwiązania, które eliminują powtarzalne zadania i pozwalają Twojemu zespołowi skupić się na strategicznym wzroście.\n                            </p>\n\n                            <!-- Section 2: How to Prepare for the Consultation -->\n                            <h2 style=\"color: #333333; border-bottom: 2px solid #eeeeee; padding-bottom: 10px; margin-top: 30px; margin-bottom: 15px; font-size: 20px;\">Jak przygotować się do naszej konsultacji?</h2>\n                            <p style=\"font-size: 16px; line-height: 1.6em; color: #555555;\">Aby nasze spotkanie było jak najbardziej produktywne, prosimy o przygotowanie kilku rzeczy:</p>\n                            <div style=\"font-size: 16px; line-height: 1.6em; padding-left: 20px; color: #555555; margin-top: 10px;\">\n                                <!-- N8N Variable for AI Guide (already in HTML format) -->\n                                {{ $json.fields['Przewodnik AI'] }}\n                            </div>\n\n                            <!-- Call to Action (Button) -->\n                            <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">\n                                <tr>\n                                    <td align=\"center\" style=\"padding: 40px 0 20px 0;\">\n                                        <!-- IMPORTANT: Replace with your Calendly link -->\n                                        <a href=\"https://calendly.com/momentumkonsulting/30min\" style=\"background-color: #0a9396; color: white; padding: 15px 30px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; border-radius: 5px; font-weight: bold;\">\n                                            Umów bezpłatną konsultację\n                                        </a>\n                                    </td>\n                                </tr>\n                            </table>\n                        </td>\n                    </tr>\n                    <!-- Footer -->\n                    <tr>\n                        <td align=\"center\" style=\"padding: 20px 30px; background-color: #eeeeee; color: #666666; font-size: 12px;\">\n                            <p style=\"margin: 0 0 5px 0;\">Otrzymałeś/aś tę wiadomość, ponieważ wypełniłeś/aś formularz na naszej stronie.</p>\n                            <p style=\"margin: 0;\">Momentum Konsulting | ul. Wirtualna 1, 00-001 Warszawa</p>\n                        </td>\n                    </tr>\n                </table>\n            </td>\n        </tr>\n    </table>\n</body>\n</html>\n\n",
+        "options": {
+          "senderName": "Momentum Konsulting"
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        720,
+        -48
+      ],
+      "id": "f6b5de45-cb08-43b4-aa0d-6541157a0994",
+      "name": "Gmail",
+      "webhookId": "bbbdc31c-2b8e-4bbc-abd8-d6d9d180a5b8",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "7I1MRZgc9aqCUP8m",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appsrHARKLs8eeVIU",
+          "mode": "list",
+          "cachedResultName": "Automation House Client Onboarding",
+          "cachedResultUrl": "https://airtable.com/appsrHARKLs8eeVIU"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblvQDTa35Y2m7uWF",
+          "mode": "list",
+          "cachedResultName": "Klienci",
+          "cachedResultUrl": "https://airtable.com/appsrHARKLs8eeVIU/tblvQDTa35Y2m7uWF"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Wiadomosc Personalizowana": "={{ $json.Personalizacja_Wiadomosci }}",
+            "Sugerowany Pakiet": "={{ $json.Sugerowany_Pakiet }}",
+            "Analiza Potrzeb AI": "={{ $json.Analiza_Potrzeb_AI }}",
+            "id": "={{ $('Airtable').item.json.id }}",
+            "Przewodnik AI": "={{ $json.Przewodnik_AI }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true
+            },
+            {
+              "id": "ClientID",
+              "displayName": "ClientID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Imię i Nazwisko",
+              "displayName": "Imię i Nazwisko",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Telefon",
+              "displayName": "Telefon",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Nazwa Firmy",
+              "displayName": "Nazwa Firmy",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Odpowiedzi z Formularza",
+              "displayName": "Odpowiedzi z Formularza",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Analiza Potrzeb AI",
+              "displayName": "Analiza Potrzeb AI",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Sugerowany Pakiet",
+              "displayName": "Sugerowany Pakiet",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Umówiona konsultacja",
+                  "value": "Umówiona konsultacja"
+                },
+                {
+                  "name": "Zafakturowany",
+                  "value": "Zafakturowany"
+                },
+                {
+                  "name": "Nowy",
+                  "value": "Nowy"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Faktury",
+              "displayName": "Faktury",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Konsultacje",
+              "displayName": "Konsultacje",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Przewodnik AI",
+              "displayName": "Przewodnik AI",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Wiadomosc Personalizowana",
+              "displayName": "Wiadomosc Personalizowana",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        720,
+        160
+      ],
+      "id": "b84bcca7-6a99-49e0-8f3f-f67b9766b1c1",
+      "name": "Update table with generic output",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "BObUj5pVoXPlIkvo",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Update `Klient` table\nUpdate with AI output.",
+        "height": 140,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        464,
+        -208
+      ],
+      "id": "7df3e334-9d27-4cdc-8aad-c65cab17f25f",
+      "name": "Sticky Note5"
+    },
+    {
+      "parameters": {
+        "content": "## Send email to client\n",
+        "height": 120
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        768,
+        -176
+      ],
+      "id": "d620ec4f-c096-410a-bd82-e1abbf7294f8",
+      "name": "Sticky Note6"
+    },
+    {
+      "parameters": {
+        "content": "## AI Integration\nFailed AI Integration - generic output!",
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        432,
+        320
+      ],
+      "id": "30178ee9-78bd-441d-a1c7-7cce417c85c9",
+      "name": "Sticky Note7"
+    },
+    {
+      "parameters": {
+        "content": "## Update `Klient` table\nUpdate with generic output.",
+        "height": 140,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        688,
+        352
+      ],
+      "id": "39a73cd9-cdf3-43dc-9019-b03d97dddb2d",
+      "name": "Sticky Note8"
+    },
+    {
+      "parameters": {
+        "content": "## Send email to client\nand to admin to inform about AI failure",
+        "height": 120,
+        "width": 300
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        960,
+        352
+      ],
+      "id": "aba61c1a-6e48-4691-b9b2-cb206e832a1b",
+      "name": "Sticky Note9"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "{\n  \"Analiza_Potrzeb_AI\": \"Wymagany kontakt w celu doprecyzowania potrzeb.\",\n  \"Sugerowany_Pakiet\": \"Do ustalenia\",\n  \"Przewodnik_AI\": \"Zastanów się, jakie powtarzalne zadania w Twojej firmie pochłaniają najwięcej czasu. Przygotuj listę narzędzi i aplikacji, z których korzystasz na co dzień (np. CRM, program do faktur, arkusze kalkulacyjne). Określ, jaki byłby idealny rezultat naszej współpracy – co chcesz osiągnąć dzięki automatyzacji?\",\n  \"Personalizacja_Wiadomosci\": \"Dziękujemy za wypełnienie naszego formularza i zainteresowanie automatyzacją procesów. Najlepszym kolejnym krokiem będzie krótka, niezobowiązująca rozmowa, podczas której poznamy lepiej Twoje potrzeby. Pomoże nam to przygotować rozwiązanie idealnie dopasowane do Twojej firmy.\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        512,
+        160
+      ],
+      "id": "b9332575-2e7f-4bfd-ae11-4e422feb71c3",
+      "name": "Generic output"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.fields.Email }}",
+        "subject": "Potwierdzenie złożenia odpowiedzi na formularz kontaktowy.",
+        "message": "=<!DOCTYPE html>\n<html lang=\"pl\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Witaj w Momentum Konsulting!</title>\n    <style>\n        /* Basic styles for better rendering */\n        body {\n            margin: 0;\n            padding: 0;\n            font-family: Arial, sans-serif;\n            background-color: #f4f7f6;\n        }\n        table {\n            border-collapse: collapse;\n        }\n        h1, h2, p {\n            margin: 0;\n        }\n    </style>\n</head>\n<body style=\"margin: 0; padding: 0; font-family: Arial, sans-serif; background-color: #f4f7f6;\">\n    <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">\n        <tr>\n            <td style=\"padding: 20px 0;\">\n                <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"600\" style=\"background-color: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden;\">\n                    <!-- Header with Logo -->\n                    <tr>\n                        <td align=\"center\" style=\"padding: 40px 0; background-color: #005f73; color: #ffffff;\">\n                            <!-- Logo for Momentum Konsulting -->\n                            <img src=\"https://bcassetcdn.com/public/blog/wp-content/uploads/2019/07/18094631/consulting-summits.png\" alt=\"Logo Momentum Konsulting\" width=\"150\" style=\"display: block;\">\n                            <h1 style=\"margin: 20px 0 0 0; font-size: 28px;\">Witaj na pokładzie!</h1>\n                        </td>\n                    </tr>\n                    <!-- Main Content -->\n                    <tr>\n                        <td style=\"padding: 40px 30px;\">\n                            <!-- Personalized Welcome Message -->\n                            <p style=\"font-size: 16px; line-height: 1.6em; margin: 0 0 25px 0; color: #333333;\">\n                                <!-- N8N Variable for Personalized Message -->\n                                {{ $json.fields['Wiadomosc Personalizowana'] }}\n                            </p>\n                            \n                            <!-- Section 1: About Us -->\n                            <h2 style=\"color: #333333; border-bottom: 2px solid #eeeeee; padding-bottom: 10px; margin-bottom: 15px; font-size: 20px;\">Jak możemy Ci pomóc?</h2>\n                            <p style=\"font-size: 16px; line-height: 1.6em; color: #555555;\">\n                                W <b>Momentum Konsulting</b> pomagamy firmom nabrać rozpędu dzięki optymalizacji i automatyzacji procesów. Wdrażamy inteligentne rozwiązania, które eliminują powtarzalne zadania i pozwalają Twojemu zespołowi skupić się na strategicznym wzroście.\n                            </p>\n\n                            <!-- Section 2: How to Prepare for the Consultation -->\n                            <h2 style=\"color: #333333; border-bottom: 2px solid #eeeeee; padding-bottom: 10px; margin-top: 30px; margin-bottom: 15px; font-size: 20px;\">Jak przygotować się do naszej konsultacji?</h2>\n                            <p style=\"font-size: 16px; line-height: 1.6em; color: #555555;\">Aby nasze spotkanie było jak najbardziej produktywne, prosimy o przygotowanie kilku rzeczy:</p>\n                            <div style=\"font-size: 16px; line-height: 1.6em; padding-left: 20px; color: #555555; margin-top: 10px;\">\n                                <!-- N8N Variable for AI Guide (already in HTML format) -->\n                                {{ $json.fields['Przewodnik AI'] }}\n                            </div>\n\n                            <!-- Call to Action (Button) -->\n                            <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">\n                                <tr>\n                                    <td align=\"center\" style=\"padding: 40px 0 20px 0;\">\n                                        <!-- IMPORTANT: Replace with your Calendly link -->\n                                        <a href=\"https://calendly.com/momentumkonsulting/30min\" style=\"background-color: #0a9396; color: white; padding: 15px 30px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; border-radius: 5px; font-weight: bold;\">\n                                            Umów bezpłatną konsultację\n                                        </a>\n                                    </td>\n                                </tr>\n                            </table>\n                        </td>\n                    </tr>\n                    <!-- Footer -->\n                    <tr>\n                        <td align=\"center\" style=\"padding: 20px 30px; background-color: #eeeeee; color: #666666; font-size: 12px;\">\n                            <p style=\"margin: 0 0 5px 0;\">Otrzymałeś/aś tę wiadomość, ponieważ wypełniłeś/aś formularz na naszej stronie.</p>\n                            <p style=\"margin: 0;\">Momentum Konsulting | ul. Wirtualna 1, 00-001 Warszawa</p>\n                        </td>\n                    </tr>\n                </table>\n            </td>\n        </tr>\n    </table>\n</body>\n</html>\n\n",
+        "options": {
+          "senderName": "Momentum Konsulting"
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        944,
+        160
+      ],
+      "id": "937e2ef3-f783-416c-b435-b131b0ff3edb",
+      "name": "Mail to client with generic output",
+      "webhookId": "bbbdc31c-2b8e-4bbc-abd8-d6d9d180a5b8",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "7I1MRZgc9aqCUP8m",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "morthell@gmail.com",
+        "subject": "Onoard clienta nie zadzaialal!",
+        "message": "=Dla tego klienta nie zadziałało AI:\n {{ $('Update table with generic output').item.json.fields[\"Imię i Nazwisko\"] }}, {{ $('Update table with generic output').item.json.fields.Email }}, {{ $('Update table with generic output').item.json.fields.Telefon }}, {{ $('Update table with generic output').item.json.fields[\"Nazwa Firmy\"] }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1168,
+        160
+      ],
+      "id": "190ec35b-50b0-423f-b441-b0bff4563eed",
+      "name": "Mail to admin after AI fail.",
+      "webhookId": "701c7107-5781-433d-927b-8a5616271368",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "7I1MRZgc9aqCUP8m",
+          "name": "Gmail account 2"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Google Sheets Trigger": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable": {
+      "main": [
+        [
+          {
+            "node": "Remove Duplicates",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Airtable",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Update table with AI output",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Generic output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Remove Duplicates": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update table with AI output": {
+      "main": [
+        [
+          {
+            "node": "Gmail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail": {
+      "main": [
+        []
+      ]
+    },
+    "Update table with generic output": {
+      "main": [
+        [
+          {
+            "node": "Mail to client with generic output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generic output": {
+      "main": [
+        [
+          {
+            "node": "Update table with generic output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mail to client with generic output": {
+      "main": [
+        [
+          {
+            "node": "Mail to admin after AI fail.",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "33fa8cbf36d5058194d59348385de74348e84a314b303d8cdb7462f4bb07e384"
+  }
+}
