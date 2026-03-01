@@ -1,0 +1,1168 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "events": [
+          "invitee.created"
+        ]
+      },
+      "type": "n8n-nodes-base.calendlyTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        288
+      ],
+      "id": "64ee86a9-6a09-419a-8948-faaf63f73f9a",
+      "name": "Calendly Trigger",
+      "webhookId": "a1dd825e-792c-45ae-b39f-98bb3b639426",
+      "credentials": {
+        "calendlyOAuth2Api": {
+          "id": "7OpNRAl1KqKz76ey",
+          "name": "Calendly account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ad325c1b-1597-45ab-98cd-1801da32e3f1",
+              "name": "data",
+              "type": "string",
+              "value": "=<!DOCTYPE html>\n<html lang=\"pl\">\n<head>\n    <meta charset=\"UTF-8\">\n    <title>Faktura</title>\n    <style>\n        body {\n            font-family: Arial, sans-serif;\n            color: #333;\n            margin: 0;\n            padding: 0;\n        }\n        .invoice-box {\n            max-width: 800px;\n            margin: auto;\n            padding: 30px;\n            border: 1px solid #eee;\n            box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);\n            font-size: 16px;\n            line-height: 24px;\n        }\n        .invoice-box table {\n            width: 100%;\n            line-height: inherit;\n            text-align: left;\n            border-collapse: collapse;\n        }\n        .invoice-box table td {\n            padding: 5px;\n            vertical-align: top;\n        }\n        .invoice-box table tr.top table td {\n            padding-bottom: 20px;\n        }\n        .invoice-box table tr.top table td.title {\n            font-size: 45px;\n            line-height: 45px;\n            color: #333;\n        }\n        .invoice-box table tr.information table td {\n            padding-bottom: 40px;\n        }\n        .invoice-box table tr.heading td {\n            background: #eee;\n            border-bottom: 1px solid #ddd;\n            font-weight: bold;\n        }\n        .invoice-box table tr.details td {\n            padding-bottom: 20px;\n        }\n        .invoice-box table tr.item td {\n            border-bottom: 1px solid #eee;\n        }\n        .invoice-box table tr.item.last td {\n            border-bottom: none;\n        }\n        .invoice-box table tr.total td:nth-child(2) {\n            border-top: 2px solid #eee;\n            font-weight: bold;\n        }\n        .text-right {\n            text-align: right;\n        }\n    </style>\n</head>\n<body>\n    <div class=\"invoice-box\">\n        <table>\n            <tr class=\"top\">\n                <td colspan=\"4\">\n                    <table>\n                        <tr>\n                            <td class=\"title\">\n                                <!-- Logo Firmy -->\n                                <img src=\"https://bcassetcdn.com/public/blog/wp-content/uploads/2019/07/18094631/consulting-summits.png\" alt=\"Logo Momentum Konsulting\" style=\"width: 100%; max-width: 200px\">\n                            </td>\n                            <td class=\"text-right\">\n                                <!-- Numer Faktury -->\n                                <h1>FAKTURA</h1>\n                                <strong>Numer:</strong> <!-- N8N Variable: --> {{ $json.fields['Numer Faktury'] }}<br>\n                                <strong>Data wystawienia:</strong> <!-- N8N Variable: -->{{ $json.fields['Data Wystawienia'] }}<br>\n                                <strong>Data sprzedaży:</strong> <!-- N8N Variable: --> {{ $json.fields['Data Wystawienia'] }}\n                            </td>\n                        </tr>\n                    </table>\n                </td>\n            </tr>\n            <tr class=\"information\">\n                <td colspan=\"4\">\n                    <table>\n                        <tr>\n                            <td>\n                                <strong>Sprzedawca:</strong><br>\n                                Momentum Konsulting<br>\n                                ul. Wirtualna 1<br>\n                                00-001 Warszawa<br>\n                                NIP: 123-456-78-90\n                            </td>\n                            <td class=\"text-right\">\n                                <strong>Nabywca:</strong><br>\n                                <!-- N8N Variable: --> {{ $('Poszukanie usera').item.json['Imię i Nazwisko'] }}<br>\n                                <!-- N8N Variable: --> {{ $('Poszukanie usera').item.json['Nazwa Firmy'] }}<br>\n                                <!-- N8N Variable: --> {{ $('Poszukanie usera').item.json.Email }}\n                            </td>\n                        </tr>\n                    </table>\n                </td>\n            </tr>\n            <tr class=\"heading\">\n                <td>Opis usługi</td>\n                <td class=\"text-right\">Ilość</td>\n                <td class=\"text-right\">Cena netto</td>\n                <td class=\"text-right\">Wartość netto</td>\n            </tr>\n            <tr class=\"item\">\n                <!-- Tutaj można wstawić opis usługi, np. na podstawie sugerowanego pakietu -->\n                <td>Konsultacja i wdrożenie automatyzacji - Pakiet <!-- N8N Variable: --> {{ $('Poszukanie usera').item.json['Sugerowany Pakiet'] }}</td>\n                <td class=\"text-right\">1</td>\n                <td class=\"text-right\"><!-- N8N Variable: --> 100 PLN</td>\n                <td class=\"text-right\"><!-- N8N Variable: --> 100 PLN</td>\n            </tr>\n            <!-- Można dodać więcej pozycji w razie potrzeby -->\n            <tr class=\"total\">\n                <td colspan=\"3\" class=\"text-right\"><strong>Suma netto:</strong></td>\n                <td class=\"text-right\"><!-- N8N Variable: --> 100 PLN</td>\n            </tr>\n            <tr class=\"total\">\n                <td colspan=\"3\" class=\"text-right\"><strong>VAT (23%):</strong></td>\n                <!-- Należy obliczyć VAT w N8N: Kwota Brutto - Kwota Netto -->\n                <td class=\"text-right\"><!-- N8N Variable: --> 150  PLN</td>\n            </tr>\n            <tr class=\"total\">\n                <td colspan=\"3\" class=\"text-right\"><strong>Do zapłaty:</strong></td>\n                <td class=\"text-right\"><strong><!-- N8N Variable: --> 150  PLN</strong></td>\n            </tr>\n        </table>\n        <div style=\"margin-top: 40px;\">\n            <strong>Forma płatności:</strong> Przelew<br>\n            <strong>Termin płatności:</strong> 14 dni<br>\n            <strong>Numer konta:</strong> PL 12 3456 7890 1234 5678 9012 3456<br>\n            <br>\n            <p>Dziękujemy za skorzystanie z naszych usług!</p>\n        </div>\n    </div>\n</body>\n</html>\n"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "e897d9d1-c4f3-40a7-a319-24d1eec06d50",
+      "name": "Create HTML",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        1104,
+        192
+      ],
+      "typeVersion": 3.3
+    },
+    {
+      "parameters": {
+        "jsCode": "const text = $node[\"Create HTML\"].json[\"data\"]\nconst buffer = Buffer.from(text, 'utf8');\nconst binaryData = {\n  data: buffer.toString('base64'),\n  mimeType: 'application/octet-stream',\n  fileName: 'file.html',\n};\nitems[0].binary = { data: binaryData };\nreturn items;\n"
+      },
+      "id": "76459b72-1eab-418f-9f53-29f0e52bbe14",
+      "name": "Convert HTML to File",
+      "type": "n8n-nodes-base.code",
+      "position": [
+        1328,
+        192
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://v2.convertapi.com/convert/html/to/pdf",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/octet-stream"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "parameterType": "formBinaryData",
+              "name": "file",
+              "inputDataFieldName": "data"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "id": "58eff7a0-9b74-44e7-b19a-5828d70caf06",
+      "name": "Convert File to PDF",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        1552,
+        192
+      ],
+      "notesInFlow": true,
+      "typeVersion": 4.2,
+      "credentials": {
+        "httpQueryAuth": {
+          "id": "bFTZC6q2Kk6447ft",
+          "name": "Query Auth account"
+        },
+        "httpBearerAuth": {
+          "id": "5p7Qwy8xk2CKDArs",
+          "name": "Bearer Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "name": "=Faktura {{ $('Dodanie faktury do bazy').item.json.fields[\"Numer Faktury\"] }}",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "https://drive.google.com/drive/folders/1uFJB6hTrvoygJagzuWwWW-wPq-Urh4Sf",
+          "mode": "url"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1760,
+        192
+      ],
+      "id": "24c023b3-7f46-4350-860d-20f652ccdd43",
+      "name": "Google Drive",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "WbSolHqwK1h6cZmZ",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appsrHARKLs8eeVIU",
+          "mode": "list",
+          "cachedResultName": "Automation House Client Onboarding",
+          "cachedResultUrl": "https://airtable.com/appsrHARKLs8eeVIU"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblLEMZp7urkCfmP1",
+          "mode": "list",
+          "cachedResultName": "Konsultacje",
+          "cachedResultUrl": "https://airtable.com/appsrHARKLs8eeVIU/tblLEMZp7urkCfmP1"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Klient": "={{[ $json.id ]}}",
+            "Status": "Zaplanowana",
+            "Data i Godzina": "={{ $('Calendly Trigger').item.json.payload.scheduled_event.start_time }}"
+          },
+          "matchingColumns": [
+            "Klient"
+          ],
+          "schema": [
+            {
+              "id": "ConsultationID",
+              "displayName": "ConsultationID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Klient",
+              "displayName": "Klient",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Data i Godzina",
+              "displayName": "Data i Godzina",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Zaplanowana",
+                  "value": "Zaplanowana"
+                },
+                {
+                  "name": "Zakończona",
+                  "value": "Zakończona"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Przewodnik AI",
+              "displayName": "Przewodnik AI",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        672,
+        192
+      ],
+      "id": "ac8a24d2-d3f9-4762-aa80-76509c5e2e6e",
+      "name": "Dodanie konsultacji",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "BObUj5pVoXPlIkvo",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appsrHARKLs8eeVIU",
+          "mode": "list",
+          "cachedResultName": "Automation House Client Onboarding",
+          "cachedResultUrl": "https://airtable.com/appsrHARKLs8eeVIU"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblvQDTa35Y2m7uWF",
+          "mode": "list",
+          "cachedResultName": "Klienci",
+          "cachedResultUrl": "https://airtable.com/appsrHARKLs8eeVIU/tblvQDTa35Y2m7uWF"
+        },
+        "filterByFormula": "={Email} = \"{{ $json.payload.email }}\"",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        224,
+        288
+      ],
+      "id": "bf0b6383-a82f-4b90-99ba-bdd22a826fd8",
+      "name": "Poszukanie usera",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "BObUj5pVoXPlIkvo",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appsrHARKLs8eeVIU",
+          "mode": "list",
+          "cachedResultName": "Automation House Client Onboarding",
+          "cachedResultUrl": "https://airtable.com/appsrHARKLs8eeVIU"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbl68LqjAiXLndFJW",
+          "mode": "list",
+          "cachedResultName": "Faktury",
+          "cachedResultUrl": "https://airtable.com/appsrHARKLs8eeVIU/tbl68LqjAiXLndFJW"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Klient": "={{ [$('Poszukanie usera').item.json.id] }}",
+            "Kwota Netto": 100,
+            "Kwota Brutto": 150,
+            "Status": "Wystawiona"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "InvoiceID",
+              "displayName": "InvoiceID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Numer Faktury",
+              "displayName": "Numer Faktury",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Klient",
+              "displayName": "Klient",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Data Wystawienia",
+              "displayName": "Data Wystawienia",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Kwota Netto",
+              "displayName": "Kwota Netto",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Kwota Brutto",
+              "displayName": "Kwota Brutto",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Opłacona",
+                  "value": "Opłacona"
+                },
+                {
+                  "name": "Wystawiona",
+                  "value": "Wystawiona"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Link do PDF",
+              "displayName": "Link do PDF",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        880,
+        192
+      ],
+      "id": "a0ec76c9-b798-489e-a414-d9fd8d260be4",
+      "name": "Dodanie faktury do bazy",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "BObUj5pVoXPlIkvo",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Poszukanie usera').item.json.Email }}",
+        "subject": "Faktura od Momentum Konsulting",
+        "message": "=<!DOCTYPE html>\n<html lang=\"pl\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Faktura od Momentum Konsulting</title>\n    <style>\n        /* Basic styles for better rendering */\n        body {\n            margin: 0;\n            padding: 0;\n            font-family: Arial, sans-serif;\n            background-color: #f4f7f6;\n        }\n        table {\n            border-collapse: collapse;\n        }\n        h1, h2, p {\n            margin: 0;\n        }\n    </style>\n</head>\n<body style=\"margin: 0; padding: 0; font-family: Arial, sans-serif; background-color: #f4f7f6;\">\n    <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">\n        <tr>\n            <td style=\"padding: 20px 0;\">\n                <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"600\" style=\"background-color: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden;\">\n                    <!-- Header with Logo -->\n                    <tr>\n                        <td align=\"center\" style=\"padding: 40px 0; background-color: #005f73; color: #ffffff;\">\n                            <!-- Logo for Momentum Konsulting -->\n                            <img src=\"https://bcassetcdn.com/public/blog/wp-content/uploads/2019/07/18094631/consulting-summits.png\" alt=\"Logo Momentum Konsulting\" width=\"150\" style=\"display: block;\">\n                            <h1 style=\"margin: 20px 0 0 0; font-size: 28px;\">Faktura do opłacenia</h1>\n                        </td>\n                    </tr>\n                    <!-- Main Content -->\n                    <tr>\n                        <td style=\"padding: 40px 30px;\">\n                            <!-- Personalized Message -->\n                            <p style=\"font-size: 16px; line-height: 1.6em; margin: 0 0 25px 0; color: #333333;\">\n                                <!-- N8N Variable: Client Name -->\n                                Cześć {{ $('Poszukanie usera').item.json['Imię i Nazwisko'] }}\n                            </p>\n                            <p style=\"font-size: 16px; line-height: 1.6em; margin: 0 0 25px 0; color: #555555;\">\n                                W załączniku przesyłamy fakturę o numerze <strong><!-- N8N Variable: Invoice Number -->{{ $('Dodanie faktury do bazy').item.json.fields['Numer Faktury'] }}\n                            </p>\n                            <p style=\"font-size: 16px; line-height: 1.6em; margin: 0 0 25px 0; color: #555555;\">\n                                Szczegóły dotyczące płatności znajdziesz w załączonym pliku PDF.\n                            </p>\n                             <p style=\"font-size: 16px; line-height: 1.6em; margin: 0 0 25px 0; color: #555555;\">\n                                Dziękujemy za zaufanie i współpracę!\n                            </p>\n                             <p style=\"font-size: 16px; line-height: 1.6em; margin: 0; color: #555555;\">\n                                Pozdrawiamy,<br>\n                                Zespół Momentum Konsulting\n                            </p>\n                        </td>\n                    </tr>\n                    <!-- Footer -->\n                    <tr>\n                        <td align=\"center\" style=\"padding: 20px 30px; background-color: #eeeeee; color: #666666; font-size: 12px;\">\n                            <p style=\"margin: 0 0 5px 0;\">Otrzymałeś/aś tę wiadomość w związku z zamówionymi usługami.</p>\n                            <p style=\"margin: 0;\">Momentum Konsulting | ul. Wirtualna 1, 00-001 Warszawa</p>\n                        </td>\n                    </tr>\n                </table>\n            </td>\n        </tr>\n    </table>\n</body>\n</html>\n",
+        "options": {
+          "attachmentsUi": {
+            "attachmentsBinary": [
+              {}
+            ]
+          },
+          "senderName": "Momentum Konsulting"
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        2208,
+        384
+      ],
+      "id": "14ec765e-910a-48fd-8992-9c64403f724a",
+      "name": "Gmail",
+      "webhookId": "bbbdc31c-2b8e-4bbc-abd8-d6d9d180a5b8",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "7I1MRZgc9aqCUP8m",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "options": {
+          "binaryPropertyName": "data",
+          "fileName": "=Faktura_MonumentKonsulting_{{ $('Poszukanie usera').item.json['Imię i Nazwisko'] }}"
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1984,
+        384
+      ],
+      "id": "1f3232ca-aba1-4bf8-8c35-80f8d4130ecc",
+      "name": "Pobierz plik faktury",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "WbSolHqwK1h6cZmZ",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "ef9aeea9-d21d-4f0a-bfb7-3f0770f5b9e0",
+              "leftValue": "={{ $json.Email }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        448,
+        288
+      ],
+      "id": "04a72d17-ccde-442c-9e42-acd50beaaf3e",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appsrHARKLs8eeVIU",
+          "mode": "list",
+          "cachedResultName": "Automation House Client Onboarding",
+          "cachedResultUrl": "https://airtable.com/appsrHARKLs8eeVIU"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblvQDTa35Y2m7uWF",
+          "mode": "list",
+          "cachedResultName": "Klienci",
+          "cachedResultUrl": "https://airtable.com/appsrHARKLs8eeVIU/tblvQDTa35Y2m7uWF"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Status": "Zafakturowany",
+            "id": "={{ $('Poszukanie usera').item.json.id }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "ClientID",
+              "displayName": "ClientID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Imię i Nazwisko",
+              "displayName": "Imię i Nazwisko",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Telefon",
+              "displayName": "Telefon",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Nazwa Firmy",
+              "displayName": "Nazwa Firmy",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Odpowiedzi z Formularza",
+              "displayName": "Odpowiedzi z Formularza",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Analiza Potrzeb AI",
+              "displayName": "Analiza Potrzeb AI",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Sugerowany Pakiet",
+              "displayName": "Sugerowany Pakiet",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Umówiona konsultacja",
+                  "value": "Umówiona konsultacja"
+                },
+                {
+                  "name": "Zafakturowany",
+                  "value": "Zafakturowany"
+                },
+                {
+                  "name": "Nowy",
+                  "value": "Nowy"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Faktury",
+              "displayName": "Faktury",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Konsultacje",
+              "displayName": "Konsultacje",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Przewodnik AI",
+              "displayName": "Przewodnik AI",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Wiadomosc Personalizowana",
+              "displayName": "Wiadomosc Personalizowana",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        1984,
+        192
+      ],
+      "id": "14c64daf-4f12-448c-8688-0a924fd237ec",
+      "name": "Zmiana statusu klienta na \"Zafakturowany\"",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "BObUj5pVoXPlIkvo",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Trigger Calendly\nAutomaticaly check if new event is scheduled"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -144,
+        112
+      ],
+      "id": "45ec77b2-0ca9-4ea2-91ab-5ea89c3896a2",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Check by email \nCheck if user is in Airtable. If so, go with adding Consultation,\n\nOtherwise, raise it with client and send email to fill form first.",
+        "width": 360
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        192,
+        80
+      ],
+      "id": "60dd81ad-44eb-4a07-bbd4-b4687f616545",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appsrHARKLs8eeVIU",
+          "mode": "list",
+          "cachedResultName": "Automation House Client Onboarding",
+          "cachedResultUrl": "https://airtable.com/appsrHARKLs8eeVIU"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbl68LqjAiXLndFJW",
+          "mode": "list",
+          "cachedResultName": "Faktury",
+          "cachedResultUrl": "https://airtable.com/appsrHARKLs8eeVIU/tbl68LqjAiXLndFJW"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $('Dodanie faktury do bazy').item.json.id }}",
+            "Link do PDF": "={{ $json.webViewLink }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true
+            },
+            {
+              "id": "InvoiceID",
+              "displayName": "InvoiceID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Numer Faktury",
+              "displayName": "Numer Faktury",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Klient",
+              "displayName": "Klient",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Data Wystawienia",
+              "displayName": "Data Wystawienia",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Kwota Netto",
+              "displayName": "Kwota Netto",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Kwota Brutto",
+              "displayName": "Kwota Brutto",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Opłacona",
+                  "value": "Opłacona"
+                },
+                {
+                  "name": "Wystawiona",
+                  "value": "Wystawiona"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Link do PDF",
+              "displayName": "Link do PDF",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        1984,
+        -16
+      ],
+      "id": "52076ec4-11e1-4722-a460-158c053fb185",
+      "name": "Update Linku",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "BObUj5pVoXPlIkvo",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Calendly Trigger').item.json.payload.email }}",
+        "subject": "Wystąpił błąd - Monument Konsulting",
+        "message": "=<!DOCTYPE html>\n<html lang=\"pl\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Problem ze zgłoszeniem - Momentum Konsulting</title>\n    <style>\n        /* Basic styles for better rendering */\n        body {\n            margin: 0;\n            padding: 0;\n            font-family: Arial, sans-serif;\n            background-color: #f4f7f6;\n        }\n        table {\n            border-collapse: collapse;\n        }\n        h1, h2, p {\n            margin: 0;\n        }\n    </style>\n</head>\n<body style=\"margin: 0; padding: 0; font-family: Arial, sans-serif; background-color: #f4f7f6;\">\n    <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">\n        <tr>\n            <td style=\"padding: 20px 0;\">\n                <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"600\" style=\"background-color: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden;\">\n                    <!-- Header with Logo -->\n                    <tr>\n                        <td align=\"center\" style=\"padding: 40px 0; background-color: #ae2012; color: #ffffff;\">\n                            <!-- Logo for Momentum Konsulting -->\n                            <img src=\"https://bcassetcdn.com/public/blog/wp-content/uploads/2019/07/18094631/consulting-summits.png\" alt=\"Logo Momentum Konsulting\" width=\"150\" style=\"display: block;\">\n                            <h1 style=\"margin: 20px 0 0 0; font-size: 28px;\">Wystąpił problem</h1>\n                        </td>\n                    </tr>\n                    <!-- Main Content -->\n                    <tr>\n                        <td style=\"padding: 40px 30px;\">\n                            <!-- Main Message -->\n                            <p style=\"font-size: 16px; line-height: 1.6em; margin: 0 0 25px 0; color: #333333;\">\n                                Cześć {{ $('Calendly Trigger').item.json.payload.name }},\n                            </p>\n                            <p style=\"font-size: 16px; line-height: 1.6em; margin: 0 0 25px 0; color: #555555;\">\n                                Otrzymaliśmy Twoją prośbę, ale nie mogliśmy odnaleźć Twoich danych w naszym systemie.\n                            </p>\n                            <p style=\"font-size: 16px; line-height: 1.6em; margin: 0 0 25px 0; color: #555555;\">\n                                Jeśli jeszcze nie wypełniłeś/aś naszego formularza kontaktowego, zrób to teraz, abyśmy mogli lepiej poznać Twoje potrzeby.\n                            </p>\n\n                            <!-- Call to Action (Button) -->\n                            <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">\n                                <tr>\n                                    <td align=\"center\" style=\"padding: 10px 0 30px 0;\">\n                                        <a href=\"https://docs.google.com/forms/d/e/1FAIpQLScwoBKeHueGYKw3y3clk7KnsefkaKsZ8toC0GnPNzJaBxwHXQ/viewform?usp=dialog\" style=\"background-color: #0a9396; color: white; padding: 15px 30px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; border-radius: 5px; font-weight: bold;\">\n                                            Wypełnij formularz kontaktowy\n                                        </a>\n                                    </td>\n                                </tr>\n                            </table>\n                            \n                             <p style=\"font-size: 16px; line-height: 1.6em; margin: 0; color: #555555;\">\n                                Jeśli formularz został już wysłany lub wolisz inną formę kontaktu, skontaktuj się z nami bezpośrednio:\n                             </p>\n                             <p style=\"font-size: 16px; line-height: 1.6em; margin: 20px 0; color: #555555; text-align: center;\">\n                                E-mail: <strong>kontakt@momentum-konsulting.pl</strong><br>\n                                Telefon: <strong>+48 123 456 789</strong>\n                             </p>\n                             <p style=\"font-size: 16px; line-height: 1.6em; margin: 0; color: #555555;\">\n                                Pozdrawiamy,<br>\n                                Zespół Momentum Konsulting\n                            </p>\n                        </td>\n                    </tr>\n                    <!-- Footer -->\n                    <tr>\n                        <td align=\"center\" style=\"padding: 20px 30px; background-color: #eeeeee; color: #666666; font-size: 12px;\">\n                            <p style=\"margin: 0 0 5px 0;\">Otrzymałeś/aś tę wiadomość, ponieważ podjąłeś/aś próbę kontaktu z nami.</p>\n                            <p style=\"margin: 0;\">Momentum Konsulting | ul. Wirtualna 1, 00-001 Warszawa</p>\n                        </td>\n                    </tr>\n                </table>\n            </td>\n        </tr>\n    </table>\n</body>\n</html>\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        672,
+        384
+      ],
+      "id": "b66a8116-2a9d-4ba2-b023-86f6f06de4c8",
+      "name": "Email to client",
+      "webhookId": "b50cdf4a-3f16-4474-97b0-9839415cf8ec",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "7I1MRZgc9aqCUP8m",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Add consultation\nwith data from Calendly",
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        592,
+        0
+      ],
+      "id": "4b256258-d3d6-4b12-b8a8-9f87c6beebd1",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "## Create Invoice in Airtable\n",
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        832,
+        0
+      ],
+      "id": "2aa9dae6-4bda-4616-a268-f3b1171802e5",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "content": "## Generate Invoice with convertapi",
+        "width": 520
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1104,
+        0
+      ],
+      "id": "069ab55a-4454-4601-971f-2a1655a100ca",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "content": "## Add a file to GDrive for storage and update Airtable - Klient and Faktury table.",
+        "width": 520
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1712,
+        -176
+      ],
+      "id": "c7220ae8-e19a-41dc-8dfe-69a72847b1a0",
+      "name": "Sticky Note5"
+    },
+    {
+      "parameters": {
+        "content": "## Download an Invoice and send email to client.\n",
+        "width": 520
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1968,
+        544
+      ],
+      "id": "fbbe0261-6cc9-4050-9af1-0c6a57b43793",
+      "name": "Sticky Note6"
+    }
+  ],
+  "connections": {
+    "Calendly Trigger": {
+      "main": [
+        [
+          {
+            "node": "Poszukanie usera",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create HTML": {
+      "main": [
+        [
+          {
+            "node": "Convert HTML to File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert HTML to File": {
+      "main": [
+        [
+          {
+            "node": "Convert File to PDF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert File to PDF": {
+      "main": [
+        [
+          {
+            "node": "Google Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive": {
+      "main": [
+        [
+          {
+            "node": "Update Linku",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Zmiana statusu klienta na \"Zafakturowany\"",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Pobierz plik faktury",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Dodanie konsultacji": {
+      "main": [
+        [
+          {
+            "node": "Dodanie faktury do bazy",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Poszukanie usera": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Dodanie faktury do bazy": {
+      "main": [
+        [
+          {
+            "node": "Create HTML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pobierz plik faktury": {
+      "main": [
+        [
+          {
+            "node": "Gmail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Dodanie konsultacji",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Email to client",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Zmiana statusu klienta na \"Zafakturowany\"": {
+      "main": [
+        []
+      ]
+    },
+    "Update Linku": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "33fa8cbf36d5058194d59348385de74348e84a314b303d8cdb7462f4bb07e384"
+  }
+}
